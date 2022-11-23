@@ -34,3 +34,22 @@ if found problem with install the package pathtools execute this command:
     pip install wheel
 '''
 
+to run the test execute this command on terminal
+
+'''
+    functions-framework --target hello_world --debug
+'''
+to change the name you must add to the url this param: /?name=Seba
+
+prerequisite: install gclod sdk https://cloud.google.com/sdk/docs/downloads-versioned-archives
+first we have to set the project id with the follow command:
+```
+gcloud config set project [YOUT_PROJECT_ID]
+```
+then we deploy our function with this command:
+(python37 is because gcloud only accept 37 version)
+```
+gcloud functions deploy hello_world --runtime python37 --trigger-http
+```
+on the option Allow unauthenticated invocations of new function [hello_world]? (y/N)?  
+put y
