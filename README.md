@@ -89,3 +89,35 @@ gcloud functions deploy [FUNCTION_NAME] --env-vars-file .env.yaml --runtime pyth
 ```
 
 then is important to add the .env.yaml in the ignore file.
+
+#testing function on browser
+
+for test on browser you must execute this command, on the console of the browser (first open the develpment tools of the browser)
+
+```
+fetch('https://us-central1-monitoring-jira.cloudfunctions.net/hello_world',{method: 'POST', headers: {'Content-Type':'application/json', 'Authorization': 'Bearer XXXXXXXXXXXX'},body:JSON.stringify({'name':'seba','lastname':'arias'})}).then(response => response.text()).then(result => console.log(result))
+
+```
+this is a javascript script.
+
+#to allow cors request
+
+this part of the code is for allow CORS request:
+```
+if request.method == 'OPTIONS':
+        headers = {
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Method' : 'POST',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Max-Age':'3600'
+        }
+        return '',204,headers
+    headers = {
+        'Access-Control-Allow-Origin' : '*'
+    }
+```
+then you must add this code on the return script
+
+```
+return f'Hello {name} {lastname}', 200, headers
+```

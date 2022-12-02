@@ -18,6 +18,18 @@ def hello_world(request):
     #request.get_json(silent=True) to get json and silent=true means if json no exist, the return is None
     request_args = request.args
     request_json = request.get_json(silent=True)
+
+    if request.method == 'OPTIONS':
+        headers = {
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Method' : 'POST',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Max-Age':'3600'
+        }
+        return '',204,headers
+    headers = {
+        'Access-Control-Allow-Origin' : '*'
+    }
     if request.method != 'POST':
         abort(405)
     bearer_token = get_bearer_token(request)
@@ -36,4 +48,4 @@ def hello_world(request):
         name = 'world'
         lastname = ''
 
-    return f'Hello {name} {lastname}'
+    return f'Hello {name} {lastname}', 200, headers
