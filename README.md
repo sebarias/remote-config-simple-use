@@ -23,10 +23,18 @@ to actate the virtual environment
 ```
     source venv/bin/activate
 ```
+
+to desactivate the virtual environment
+run
+```
+deactivate
+
+```
+
 in order to add new packages to our virutal environment we create a  file called requirenments.txt an execute the following command:
 execute only if you see the venv prefix on the terminal.
 '''
-pip install -r requirenments.txt
+    pip install -r requirenments.txt
 '''
 if found problem with install the package pathtools execute this command:
 
@@ -34,7 +42,21 @@ if found problem with install the package pathtools execute this command:
     pip install wheel
 ```
 
+when you add credentials in the .env file is necesary to run this command
+on the root folder
+
+```
+source .env
+```
+
+the to be sure to add the credentials, run
+
+```
+printenv | grep GOOGLE
+```
+
 to run the test execute this command on terminal
+first you must to go to the file folder.
 
 ```
     functions-framework --target hello_world --debug
@@ -53,6 +75,8 @@ gcloud functions deploy hello_world --runtime python37 --trigger-http
 ```
 on the option Allow unauthenticated invocations of new function [hello_world]? (y/N)?  
 put y
+
+### important: include all dependencies on the requirements.txt file of the function folder.
 
 #Secure function
 
@@ -121,3 +145,29 @@ then you must add this code on the return script
 ```
 return f'Hello {name} {lastname}', 200, headers
 ```
+
+#test with curl
+to test this with curl execute this: 
+
+```
+curl -i -X OPTIONS 'https://us-central1-monitoring-jira.cloudfunctions.net/hello_world' 
+
+```
+
+and the response will be something like that:
+
+```
+HTTP/2 204 
+access-control-allow-headers: Content-Type
+access-control-allow-method: POST
+access-control-allow-origin: *
+access-control-max-age: 3600
+content-type: text/html; charset=utf-8
+function-execution-id: xov65ji2xsc7
+x-cloud-trace-context: 58975bd00c26c42caee4c0cb0cd962fe;o=1
+date: Fri, 02 Dec 2022 21:56:17 GMT
+server: Google Frontend
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+```
+
+withe the all the CORS config allowed.
