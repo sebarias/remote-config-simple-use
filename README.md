@@ -171,3 +171,13 @@ alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=25920
 ```
 
 withe the all the CORS config allowed.
+
+
+### schedule Cloud Functions
+````
+gcloud components install beta
+gcloud componentes update
+gcloud pubsub topic create [TOPIC_NAME]
+gcloud pubsub subscription create cron-sub --topic [TOPIC_NAME]
+
+```
