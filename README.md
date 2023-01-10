@@ -181,3 +181,17 @@ gcloud pubsub topic create [TOPIC_NAME]
 gcloud pubsub subscription create cron-sub --topic [TOPIC_NAME]
 
 ```
+
+then go to the gcloud platform and search scheduler and also go to functions to see the endpoint in the trigger tab
+on the schedule create a job and fill the filds with the respective data
+the frecuency tab use the crontab format, and what you want of the frecuency you must use this format. 
+search on google 'crontab every monday' for example.
+
+
+### Deleting Cloud functions
+
+execute this command
+````
+gcloud fucntions delete [FUNCTION_NAME]
+```
+
